@@ -2,7 +2,6 @@ module.exports = {
   env: {
     browser: true,
     es6: true,
-    'jest/globals': true,
   },
   extends: ['airbnb', 'eslint-config-prettier', 'prettier/react'],
   globals: {
@@ -26,6 +25,8 @@ module.exports = {
         extensions: ['.jsx', '.js'],
       },
     ],
+    'import/extensions': ['error', 'always', {
+      js: 'never'}],
     'import/prefer-default-export': 'off',
     'react/state-in-constructor': [0, 'always'],
     'react/jsx-props-no-spreading': [0, 'always'],
@@ -33,7 +34,6 @@ module.exports = {
     'no-param-reassign': 'off',
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
-    'react/prop-types': [0, 'always'],
   },
   settings: {
     'import/resolver': {
