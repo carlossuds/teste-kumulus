@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 import Modal from 'styled-react-modal';
-import { darken } from 'polished';
+import { lighten, darken } from 'polished';
 
 const colors = {
   primary: '#6619B1',
   secondary: '#eddaff',
+  red: '#F64645',
 };
 
 export const StyledModal = styled(Modal)`
@@ -18,12 +19,19 @@ export const ModalContainer = styled.div`
   justify-content: space-around;
   flex-direction: column;
   align-items: center;
-  height: 50%;
-  width: auto;
+  height: 30%;
+  width: 20%;
   border-radius: 8px;
   padding: 15px;
 
   background-color: ${colors.secondary};
+
+  svg {
+    position: absolute;
+    right: 40%;
+    top: 35%;
+    cursor: pointer;
+  }
 `;
 
 export const ButtonsDiv = styled.div`
@@ -37,11 +45,10 @@ export const ButtonsDiv = styled.div`
 export const Yes = styled.button`
   border: none;
   border-radius: 4px;
-  background-color: rgb(246, 70, 69);
+  background-color: ${lighten(0.1, `${colors.red}`)};
 
   font: 14px 'Montserrat', sans-serif;
-  color: ${colors.primary};
-  font-weight: bold;
+  color: #f2f2f2;
 
   align-items: center;
   justify-content: center;
@@ -51,7 +58,7 @@ export const Yes = styled.button`
   transition: all 300ms;
   &:hover {
     transform: scale(1.1);
-    background-color: ${darken(0.1, 'rgb(246, 70, 69)')};
+    background-color: ${darken(0.1, `${colors.red}`)};
   }
 `;
 
@@ -105,14 +112,16 @@ export const ListItem = styled.div`
   flex-direction: row;
 
   aside {
+    display: flex;
+    flex-direction: row;
     transition: all 300ms ease-in-out;
     position: relative;
-    left: -35px;
+    left: -105px;
   }
 
   &:hover aside {
     position: relative;
-    transform: translateX(35px);
+    transform: translateX(105px);
   }
 `;
 
@@ -123,7 +132,7 @@ export const User = styled.div`
   align-items: center;
 
   width: 100%;
-
+  height: 90px;
   z-index: 5;
 
   background-color: ${props =>
@@ -162,9 +171,10 @@ export const User = styled.div`
 
 export const DeleteBtn = styled.button`
   cursor: pointer;
-
+  position: relative;
+  left: -5px;
   border: none;
-  background-color: rgb(246, 70, 69);
+  background-color: ${lighten(0.05, `${colors.red}`)};
   border-bottom-right-radius: 4px;
   border-top-right-radius: 4px;
   height: 100%;
@@ -177,16 +187,40 @@ export const DeleteBtn = styled.button`
   }
 `;
 
+export const EditBtn = styled.button`
+  cursor: pointer;
+  z-index: 3;
+  border: none;
+  background-color: ${colors.primary};
+  border-bottom-right-radius: 4px;
+  border-top-right-radius: 4px;
+  height: 100%;
+  width: 35px;
+
+  svg {
+    transition: all 1s;
+    height: 100%;
+    width: 100%;
+  }
+  &:hover svg {
+    transform: scale(1.3);
+  }
+`;
+
 export const FilterDiv = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin: 5% 0 2% 0;
+  justify-self: center;
   width: 30%;
-
+  margin-bottom: 4%;
   svg {
     position: relative;
     left: 35px;
+    background-color: ${colors.secondary};
+    padding: 8.5px;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
   }
 
   input {
@@ -215,16 +249,36 @@ export const Pagination = styled.div`
   align-self: center;
 `;
 
-export const Button = styled.button`
+export const PageButton = styled.button`
   margin-right: 5px;
   height: 20px;
   width: 20px;
-  border-radius: 10px;
-  border: 1px solid ${colors.primary};
+  border-radius: 4px;
+  border: none;
   background-color: ${props =>
     props.selected ? colors.primary : colors.secondary};
   font: 14px 'Montserrat', sans-serif;
   color: ${props => (!props.selected ? colors.primary : colors.secondary)};
-  align-items: center;
-  justify-content: center;
+`;
+
+export const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+`;
+
+export const AddBtn = styled.button`
+  position: absolute;
+  right: 10%;
+  border: none;
+  background-color: ${colors.primary};
+  width: 200px;
+  height: 40px;
+  border-radius: 4px;
+
+  a {
+    text-decoration: none;
+    color: #f2f2f2;
+    font: 14px 'Montserrat', sans-serif;
+  }
 `;

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { GoTrashcan, GoSearch } from 'react-icons/go';
+import { GoTrashcan, GoSearch, GoPencil } from 'react-icons/go';
+import { IoMdCloseCircleOutline, IoIosTrash, IoMdTrash } from 'react-icons/io';
 import { ModalProvider } from 'styled-react-modal';
+import { Link } from 'react-router-dom';
 
 // import Modal from '../../components/Modal';
 
@@ -11,19 +13,24 @@ import {
   ButtonsDiv,
   Yes,
   No,
+  Row,
   FilterDiv,
   UserList,
   ListHeader,
   ListItem,
   User,
+  EditBtn,
   DeleteBtn,
   Pagination,
-  Button,
+  PageButton,
+  AddBtn,
 } from './styles';
 
 import api from '../../services/api';
+import usersJson from '../../assets/users.json';
 
 export default function Main() {
+  // const [users, setUsers] = useState([]);
   const [users, setUsers] = useState([]);
   const [page, setPage] = useState(1);
   const [pagination, setPagination] = useState([]);
@@ -36,11 +43,15 @@ export default function Main() {
 
   useEffect(() => {
     async function loadUsers() {
-      const response = await api.get();
-      setUsers(response.data);
+      /* const response = await api.get();
+      setUsers(response.data); */
+
+      setUsers(usersJson);
 
       const arrayNumbers = [];
-      for (let n = 0; n < Math.ceil(response.data.length / 5); n++) {
+      // for (let n = 0; n < Math.ceil(response.data.length / 5); n++) {
+      // eslint-disable-next-line no-plusplus
+      for (let n = 0; n < Math.ceil(usersJson.length / 5); n++) {
         arrayNumbers.push(n + 1);
       }
       setPagination(arrayNumbers);
@@ -67,26 +78,34 @@ export default function Main() {
           onEscapeKeydown={() => setOpenModal(false)}
         >
           <ModalContainer>
+            <IoMdCloseCircleOutline
+              onClick={() => setOpenModal(false)}
+              color="#6619b1"
+              size={30}
+            />
             <span>
               Permanently <strong>delete</strong> user{' '}
               <strong>{selectedUser}</strong>?
             </span>
+            <Yes onClick={handleDelete}>DELETE</Yes>
+            {/*
             <ButtonsDiv>
-              <Yes onClick={handleDelete}>DELETE</Yes>
-              <No onClick={() => setOpenModal(false)}>Cancel</No>
-            </ButtonsDiv>
+               <No onClick={() => setOpenModal(false)}>Cancel</No>
+            </ButtonsDiv> */}
           </ModalContainer>
         </StyledModal>
       </ModalProvider>
-
       <FilterDiv>
-        <GoSearch size={20} color="#6619b1" />
+        <GoSearch size={25} color="#6619b1" />
         <input
           placeholder="Search by [Name] or [Username]"
           onChange={e => setFilter(e.target.value)}
         />
-      </FilterDiv>
 
+        <AddBtn>
+          <Link to="/edit">Add User</Link>
+        </AddBtn>
+      </FilterDiv>
       <UserList>
         <ListHeader>
           <strong>Name</strong>
@@ -101,7 +120,8 @@ export default function Main() {
           .filter(
             user =>
               filter === null ||
-              user.name.toLowerCase().includes(filter.toLowerCase()),
+              user.name.toLowerCase().includes(filter.toLowerCase()) ||
+              user.username.toLowerCase().includes(filter.toLowerCase()),
           )
           .filter(user => (page - 1) * 5 < user.id && user.id < page * 5 + 1)
           .map((user, index) => (
@@ -127,8 +147,14 @@ export default function Main() {
                 </span>
               </User>
               <aside>
+                <EditBtn>
+                  <Link to={{ pathname: '/edit', state: { userToEdit: user } }}>
+                    <GoPencil color="white" />
+                  </Link>
+                </EditBtn>
+
                 <DeleteBtn onClick={() => toggleModal(user.id)}>
-                  <GoTrashcan size={20} color="#6619b1" />
+                  <IoMdTrash size={25} color="white" />
                 </DeleteBtn>
               </aside>
             </ListItem>
@@ -136,13 +162,13 @@ export default function Main() {
       </UserList>
       <Pagination>
         {pagination.map(p => (
-          <Button
+          <PageButton
             selected={p === page}
             onClick={() => setPage(p)}
             type="button"
           >
             {p}
-          </Button>
+          </PageButton>
         ))}
       </Pagination>
     </Container>
