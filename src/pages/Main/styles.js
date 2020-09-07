@@ -99,7 +99,7 @@ export const ListHeader = styled.div`
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   padding: 10px 15px;
-
+  width: calc(100% - 102px);
   span,
   strong {
     color: ${colors.primary};
@@ -112,6 +112,7 @@ export const ListItem = styled.div`
   flex-direction: row;
 
   aside {
+    position: relative;
     display: flex;
     flex-direction: row;
     transition: all 300ms ease-in-out;
@@ -145,12 +146,6 @@ export const User = styled.div`
 
     span {
       font-size: 10px;
-    }
-
-    &:last-child {
-      div {
-        visibility: hidden;
-      }
     }
 
     &:last-child:hover {
@@ -250,6 +245,7 @@ export const Pagination = styled.div`
 `;
 
 export const PageButton = styled.button`
+  cursor: pointer;
   margin-right: 5px;
   height: 20px;
   width: 20px;
