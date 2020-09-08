@@ -28,7 +28,7 @@ import {
 
 import api from '../../services/api';
 
-export default function Main({ location }) {
+export default function Main({ location, history }) {
   // const [users, setUsers] = useState([]);
   const [users, setUsers] = useState([]);
   const [page, setPage] = useState(1);
@@ -110,10 +110,7 @@ export default function Main({ location }) {
           placeholder="Search by [Name] or [Username]"
           onChange={e => setFilter(e.target.value)}
         />
-
-        <AddBtn>
-          <Link to="/edit">Add User</Link>
-        </AddBtn>
+        <AddBtn onClick={() => history.push('/edit')}>Add User</AddBtn>
       </FilterDiv>
       <UserList>
         <ListHeader>

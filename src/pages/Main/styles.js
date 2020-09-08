@@ -274,6 +274,7 @@ export const Row = styled.div`
 `;
 
 export const AddBtn = styled.button`
+  cursor: pointer;
   position: absolute;
   right: 10%;
   border: none;
@@ -281,10 +282,9 @@ export const AddBtn = styled.button`
   width: 200px;
   height: 40px;
   border-radius: 4px;
-
+  color: #f2f2f2;
+  font: 14px 'Montserrat', sans-serif;
   a {
     text-decoration: none;
-    color: #f2f2f2;
-    font: 14px 'Montserrat', sans-serif;
   }
 `;
