@@ -9,16 +9,18 @@ const colors = {
 export const Container = styled.div`
   display: flex;
   position: relative;
-  left: -10px;
+  align-self: flex-end;
+  justify-content: center;
   bottom: -10px;
-  padding: 5px 0;
-  width: 101.2%;
+  padding: 30px 0;
+  width: 100%;
   height: 200px;
   background-color: #6619b1;
   margin-top: 10px;
 
-  > a {
-    margin: 100px 5%;
+  > img {
+    position: absolute;
+    left: 5%;
   }
 
   span {

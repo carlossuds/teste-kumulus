@@ -9,7 +9,13 @@ const colors = {
 
 export const Error = styled.div`
   position: absolute;
-  background-color: #f2f2f2;
+  background-color: ${props =>
+    props.error
+      ? lighten(0.2, `${colors.red}`)
+      : props.tintBg
+      ? `#f2f2f2`
+      : `${colors.secondary}`};
+
   color: ${colors.red};
   font-weight: 700;
   padding: 2px;

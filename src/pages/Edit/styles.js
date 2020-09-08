@@ -13,11 +13,13 @@ export const Container = styled.div`
   width: 100%;
 
   h1 {
-    margin-left: 10%;
+    margin: 2.5% 0 0 10%;
   }
+
   svg {
     position: fixed;
     left: 2%;
+    top: 15%;
     cursor: pointer;
     transition: all 100ms;
 
@@ -32,7 +34,7 @@ export const FormDiv = styled(Form)`
   flex-direction: column;
   justify-content: space-between;
   align-self: center;
-  width: 101%;
+  width: 100%;
   height: 100%;
 
   button {

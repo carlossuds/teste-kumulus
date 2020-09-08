@@ -19,16 +19,46 @@ export default function Edit({ location, history }) {
   async function handleSubmit(data) {
     try {
       const schema = Yup.object().shape({
+        name: Yup.string().required('Name is required'),
+        username: Yup.string().required('Username is required'),
         email: Yup.string()
           .email('Email must be valid')
           .required('Email is required'),
+        phone: Yup.string('Phone must be a number').required(
+          'Phone is required',
+        ),
+        website: Yup.string()
+          .url('Website must be valid')
+          .required('Website is required'),
+        address: Yup.object().shape({
+          street: Yup.string().required('Street is required'),
+          suite: Yup.string().required('Suite is required'),
+          city: Yup.string().required('City is required'),
+          zipcode: Yup.string().required('Zipcode is required'),
+          geo: Yup.object().shape({
+            lat: Yup.string().required('Latitude is required'),
+            lng: Yup.string().required('Longitude is required'),
+          }),
+        }),
+        company: Yup.object().shape({
+          name: Yup.string().required('Company Name is required'),
+          catchPhrase: Yup.string().required('Catchphrase is required'),
+          bs: Yup.string().required('BS is required'),
+        }),
       });
 
       await schema.validate(data, {
         abortEarly: false,
       });
 
-      setUser(data);
+      const newUser = {
+        id: user ? user.id : Math.floor(Math.random() * 100 + 10),
+        ...data,
+      };
+
+      console.log(newUser);
+
+      history.push({ pathname: '/', state: { user: newUser } });
     } catch (err) {
       const validationErrors = {};
       if (err instanceof Yup.ValidationError) {
@@ -40,6 +70,7 @@ export default function Edit({ location, history }) {
         console.log(err);
         err.errors.map(error => toast.error(error));
       }
+      console.log(err);
     }
   }
 
@@ -68,7 +99,7 @@ export default function Edit({ location, history }) {
           <Section columns={2}>
             <InputDiv>
               <strong>Phone</strong>
-              <Input name="phone" type="text" />
+              <Input name="phone" type="number" />
             </InputDiv>
             <InputDiv>
               <strong>Website</strong>
@@ -97,11 +128,11 @@ export default function Edit({ location, history }) {
             </InputDiv>
             <InputDiv>
               <strong>Latitude</strong>
-              <Input tintBg name="address.geo.lat" type="numeric" />
+              <Input tintBg name="address.geo.lat" type="number" />
             </InputDiv>
             <InputDiv>
               <strong>Longitude</strong>
-              <Input tintBg name="address.geo.lng" type="numeric" />
+              <Input tintBg name="address.geo.lng" type="number" />
             </InputDiv>
           </Section>
         </SectionArea>
@@ -113,7 +144,7 @@ export default function Edit({ location, history }) {
             </InputDiv>
             <InputDiv>
               <strong>Catchphrase</strong>
-              <Input name="company.name" type="text" />
+              <Input name="company.catchPhrase" type="text" />
             </InputDiv>
             <InputDiv>
               <strong>BS</strong>

@@ -16,7 +16,7 @@ export default function Input({ name, children, ...rest }) {
 
   return (
     <>
-      {error && <Error>{error}</Error>}
+      {error && <Error tintBg={!rest.tintBg}>{error}</Error>}
       <MyInput
         ref={inputRef}
         error={error}

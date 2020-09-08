@@ -89,10 +89,17 @@ export const Container = styled.div`
 
   align-items: center;
   justify-content: center;
+
+  > svg {
+    position: absolute;
+    bottom: 0;
+  }
 `;
 
 export const UserList = styled.div`
   width: 90%;
+  min-height: 100%;
+  z-index: 2;
 `;
 
 export const ListHeader = styled.div`
@@ -131,6 +138,7 @@ export const User = styled.div`
   grid-template-columns: repeat(7, 1fr);
   padding: 10px 15px;
   align-items: center;
+  overflow: hidden;
 
   width: 100%;
   height: 90px;
@@ -203,6 +211,7 @@ export const EditBtn = styled.button`
 `;
 
 export const FilterDiv = styled.div`
+  z-index: 5;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -242,6 +251,7 @@ export const Pagination = styled.div`
   display: flex;
   flex-direction: row;
   align-self: center;
+  z-index: 2;
 `;
 
 export const PageButton = styled.button`
