@@ -2,9 +2,9 @@
 
 ## Instalação
 
-- Clone o projeto 
-- Instale as dependências com o comando ```yarn```
-- Inicie o projeto com o comando ```yarn start```
+- Clonar o projeto 
+- Instalar as dependências com o comando ```yarn```
+- Iniciar o projeto com o comando ```yarn start```
 
 ## O Teste
 
